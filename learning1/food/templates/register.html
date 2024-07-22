@@ -1,0 +1,80 @@
+{% extends 'samecode.html'%} {% block start %}
+<div class="container mt-4">
+    <h1>Register</h1>
+    <hr />
+    {% if messages %}
+    <div class="alert alert-danger" role="alert">
+        {% for message in messages %} {{ message }} {% endfor %}
+    </div>
+    {% endif %}
+    <div class="d-flex justify-content-center">
+        <form class="form-control " method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="first name" class="form-label">first_name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="first_nmae"
+                    name="first_name"
+                    aria-describedby="emailHelp"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <label for="last name" class="form-label">last_name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    name="last_name"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <label for="last name" class="form-label">username</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    aria-describedby="emailHelp"
+                    required
+                />
+                <div id="emailHelp" class="form-text">
+                    We'll never share your email with anyone else.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                    >Password</label
+                >
+                <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="password must greater than 8 characters"
+                    required
+                />
+            </div>
+            <div class=" d-flex justify-content-center">
+            <a href="/login/" class="btn btn-primary m-3">Login</a>
+            <button type="submit" class="btn btn-primary m-3">Register</d>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %} ```

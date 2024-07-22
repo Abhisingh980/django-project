@@ -1,0 +1,56 @@
+{% extends 'samecode.html' %}
+{% block start %}
+
+
+        <h1>Welcome to my first django page</h1>
+
+        <!--- divide by the line break tag --->
+
+        <br>
+        <hr>
+
+
+        <a href="/home/">
+            <button class="btn btn-primary">Go to home page</button>
+        </a>
+
+        <a href="/index/">
+            <button class="btn btn-primary">Go to index page</button>
+        </a>
+
+        <a href="/contact/">
+            <button class="btn btn-primary">Go to contact page</button>
+        </a>
+
+        <hr>
+        <table class="container table table-bordered table-hover table-striped">
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>symbol</th>
+            </tr>
+
+            {% for data in data %}
+            <tr>
+                <th class="text-warning">{{forloop.counter}}</th>
+                <th>{{data.name}}</th>
+                <th>{{data.age}}</th>
+                <th {% if data.age < 40 %}
+                    style="background-color: green;"
+                    {% else %}
+                    style='background-color: gray;'
+                    {% endif%} >
+                {% if data.age > 40 %}
+                👉🏻
+                {% else %}
+                👈🏻
+                {% endif %}
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+{% endblock %}
+```

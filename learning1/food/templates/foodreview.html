@@ -1,0 +1,143 @@
+{% extends 'samecode.html' %} {% block start %}
+
+<!---- food review form  prpoose is write data in database -->
+<style>
+    .center-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
+
+<div class="container mt-5 shadow-lg">
+    <div class="row justify-content-center card-3d shadow-lg">
+        <div class="col-md-12 card-3d-linner p-2 bg-success-subtle rounded">
+            <form
+                class="form-control card box-shadow shadow-custom-red"
+                method="post"
+                enctype="multipart/form-data"
+            >
+                {% csrf_token %}
+                <h1 class="text-center ustyfy-content-center text-danger">
+                    Foood Bloging
+                </h1>
+                <hr />
+                <div class="mb-3 form-group">
+                    <label for="queary" class="form-label"
+                        ><h5 class="fs-5 text-warning fw-bold">
+                            Food Name --
+                        </h5></label
+                    >
+                    <input
+                        type="text"
+                        class="form-control fs-4 text-primary-emphasis"
+                        id="queary"
+                        name="quearytext"
+                        rows="2"
+                        placeholder="Enter the queary to get the data visualisation"
+                        required
+                    />
+                </div>
+                <div class="mb-3 form-group">
+                    <label
+                        for="discription"
+                        name="discription"
+                        class="form-label fs-5 text-warning fw-bold"
+                        >Discription</label
+                    >
+                    <textarea
+                        class="form-control fs-4 text-primary-emphasis"
+                        id="discriptionfood"
+                        name="discription"
+                        rows="3"
+                        placeholder="Enter the discription of the food"
+                        required
+                    ></textarea>
+                </div>
+                <div class="form-group custom-file-container d-flex">
+                    <label for="fileInput" class="custom-file-label"
+                        >Choose file</label
+                    >
+                    <input
+                        type="file"
+                        class="custom-file-input"
+                        id="fileInput"
+                        name="imagefile"
+                        required
+                    />
+                    <span class="file-name">Upload Image</span>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success m-3 fs-2 text-black fw-bold justify-content-end"
+                    >
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- search box to search in the table -->
+
+<div class="container ml-5">
+<form class="d-flex justify-content-center mt-5">
+    <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Seach the food name"
+        aria-label="Search"
+        name="search"
+    />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</div>
+
+<!---- food review form  prpoose is read data from database -->
+<div class="container mt-5">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Food Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aboutfood in fooddata %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ aboutfood.foodname }}</td>
+                <td>{{ aboutfood.description }}</td>
+                <td>
+                    <img
+                        src="/images/{{ aboutfood.image }}"
+                        alt="food image"
+                        class="img-thumbnail p-2 shadow-lg rounded m-1"
+                        width="100"
+                        height="100"
+                    />
+                </td>
+                <th>
+                    <div class="center-buttons">
+                        <a
+                            href="/delete/{{ aboutfood.id }}"
+                            class="btn btn-danger mx-2"
+                            >Delete</a
+                        >
+                        <a
+                            href="/update/{{aboutfood.id}}"
+                            class="btn btn-success mx-2"
+                            >Update</a
+                        >
+                    </div>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
