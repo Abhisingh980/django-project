@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from faker import Faker
 from .models import fakedata
+from django.core.paginator import Paginator
 
 # Create your views here.
 #
 def fakedatageneration(request):
     #generate_data(10)
     get_all_data = fakedata.objects.all()
-    print(get_all_data)
-    return render(request, 'fake.html', {'data': get_all_data})
+    paginator = Paginator(get_all_data, 10)  # Show 25 contacts per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'fake.html', {'data': get_all_data, 'page_obj': page_obj})
 
 # def data_from_drop_dawn(request):
 #     if request.method == 'POST':
