@@ -52,16 +52,18 @@
                                     <th scope="col">Address</th>
                                 </tr>
                             </thead>
+                            {% for data_fake in data %}
                             <tbody>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>1234567890</td>
-                                    <td>1234567890</td>
+                                    <th scope="row">{{data_fake.unique_id}}</th>
+                                    <td>{{data_fake.first_name}}</td>
+                                    <td>{{data_fake.last_name}}</td>
+                                    <td>{{data_fake.email}}</td>
+                                    <td>{{data_fake.phone}}</td>
+                                    <td>{{data_fake.address}}</td>
                                 </tr>
                             </tbody>
+                            {% endfor %}
                         </table>
                     </form>
                 </div>

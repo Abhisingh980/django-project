@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from faker import Faker
+from .models import fakedata
 
 # Create your views here.
 #
 def fakedatageneration(request):
-    return render(request, 'fake.html')
+    #generate_data(10)
+    get_all_data = fakedata.objects.all()
+    print(get_all_data)
+    return render(request, 'fake.html', {'data': get_all_data})
 
 # def data_from_drop_dawn(request):
 #     if request.method == 'POST':
@@ -18,7 +22,7 @@ def fakedatageneration(request):
 #     return render(request, 'fake.html')
 
 
-def generate_data(n=10):
+def generate_data(n):
     fake = Faker()
     for _ in range(n):
         fakedata.objects.create(
@@ -29,6 +33,5 @@ def generate_data(n=10):
             phone = fake.phone_number(),
             address = fake.address()
         )
-        fakedata.save()
 
     return "Data Generated Successfully"
