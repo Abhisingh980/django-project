@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from faker import Faker
 
 # Create your views here.
 #
@@ -15,3 +16,19 @@ def fakedatageneration(request):
 
 #         print(selct_value)
 #     return render(request, 'fake.html')
+
+
+def generate_data(n=10):
+    fake = Faker()
+    for _ in range(n):
+        fakedata.objects.create(
+            unique_id = fake.random_int(),
+            first_name = fake.first_name(),
+            last_name = fake.last_name(),
+            email = fake.email(),
+            phone = fake.phone_number(),
+            address = fake.address()
+        )
+        fakedata.save()
+
+    return "Data Generated Successfully"
