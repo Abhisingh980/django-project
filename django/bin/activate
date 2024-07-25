@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/abhisingh/vim-practice/django/django"
+VIRTUAL_ENV="/Users/abhisingh/django/django"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from home.views import *
 from form.views import *
 from food.views import *
+from fakedata.views import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
@@ -34,6 +35,7 @@ urlpatterns = [
     path('login/', login_page, name='login'),
     path('logout/', logout_user, name='logout'),
     path('register/', register, name='register'),
+    path('fake/', fakedatageneration, name='fake'),
 
 
 

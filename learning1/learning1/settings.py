@@ -45,6 +45,7 @@ Extra_apps = [
     'home',
     'form',
     'food',
+    'fakedata',
 ] # Add this line to include the app in the project
 
 INSTALLED_APPS += Extra_apps # Add this line to include the app in the project

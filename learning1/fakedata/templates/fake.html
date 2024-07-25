@@ -1,0 +1,72 @@
+{% extends 'samecode.html' %} {%load custom_tags %} {% block start %}
+<h1 class="text-center text-success">Fake Data Generation .......</h1>
+<div class="container shadow-lg">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title m-3 text-center">
+                        first_name, last_name, address, email, and phone number
+                        according to your need
+                    </h4>
+                    <form class="form" method="POST" action="{% url 'fake' %}">
+                        {% csrf_token %}
+                        <div class="container mt-5">
+                            <div class="d-flex justify-content-start">
+                                <label for="dropdawn">Chose the key</label>
+                                {% for _ in 5|times %}
+                                <div class="dropdown me-2 ms-3">
+                                    <select
+                                        class="form-select"
+                                        name="option_key"
+                                        id="option_key"
+                                    >
+                                        <option value="first_name">
+                                            First Name
+                                        </option>
+                                        <option value="last_name">
+                                            Last Name
+                                        </option>
+                                        <option value="address">Address</option>
+                                        <option value="email">Email</option>
+                                        <option value="phone_number">
+                                            Phone Number
+                                        </option>
+                                    </select>
+                                </div>
+                                {% endfor %}
+                                <button class="btn btn-primary" type="submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                        <hr />
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">First_name</th>
+                                    <th scope="col">Last_name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone_number</th>
+                                    <th scope="col">Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>1234567890</td>
+                                    <td>1234567890</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
