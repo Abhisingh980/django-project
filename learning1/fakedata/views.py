@@ -12,7 +12,8 @@ def fakedatageneration(request):
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, 'fake.html', {'data': get_all_data, 'page_obj': page_obj})
+    total_pages = paginator.num_pages
+    return render(request, 'fake.html', {'data': get_all_data, 'page_obj': page_obj, 'total_pages': total_pages})
 
 # def data_from_drop_dawn(request):
 #     if request.method == 'POST':
