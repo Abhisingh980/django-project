@@ -1,167 +1,122 @@
-{% extends 'samecode.html' %} {%load custom_tags %} {% block start %}
+{% extends 'samecode.html' %} {% load custom_tags %} {% block start %}
 <h1 class="text-center text-success">Fake Data Generation .......</h1>
-<div class="container shadow-lg">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title m-3 text-center">
-                        first_name, last_name, address, email, and phone number
-                        according to your need
-                    </h4>
-                    <form class="form" method="POST" action="{% url 'fake' %}">
-                        {% csrf_token %}
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                        <div class="container mt-5">
-                            <div class="d-flex justify-content-start">
-
-                            <div class="container mt-5">
-                                <div class="d-flex justify-content-center ">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        name="search"
-                                        id="search"
-                                        placeholder="Filter from below data"
-                                    />
-                                    <button class="btn btn-primary ms-2" type="submit">
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="container shadow-lg mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title text-center fs-5 text-primary">
+                First Name, Last Name, Address, Email, and Phone Number
+                According to Your Need
+            </h4>
+            <form method="POST" action="{% url 'fake' %}">
+                {% csrf_token %}
+                <div class="d-flex justify-content-center">
+                    <input
+                        type="text"
+                        class="form-control me-2"
+                        name="search"
+                        id="search"
+                        placeholder="Filter from below data"
+                        value="{{ request.GET.search }}"
+                    />
+                    <button class="btn btn-primary" type="submit">
+                        Search
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
-</div>
-<hr />
-<!--Search box -->
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">First_name</th>
-            <th scope="col">Last_name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone_number</th>
-            <th scope="col">Address</th>
-        </tr>
-    </thead>
-    {% for data_fake in data %}
-    <tbody>
-        <tr>
-            <th scope="row">{{data_fake.unique_id}}</th>
-            <td>{{data_fake.first_name}}</td>
-            <td>{{data_fake.last_name}}</td>
-            <td>{{data_fake.email}}</td>
-            <td>{{data_fake.phone}}</td>
-            <td>{{data_fake.address}}</td>
-        </tr>
-    </tbody>
-    {% endfor %}
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data_fake in data %}
+                    <tr>
+                        <th scope="row">{{ data_fake.unique_id }}</th>
+                        <td>{{ data_fake.first_name }}</td>
+                        <td>{{ data_fake.last_name }}</td>
+                        <td>{{ data_fake.email }}</td>
+                        <td>{{ data_fake.phone }}</td>
+                        <td>{{ data_fake.address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    <div class="pagination">
-        <nav aria-label="Page navigation">
-            <ul
-                class="pagination justify-content-center"
-            >
-                <span class="step-links">
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
                     {% if page_obj.has_previous %}
                     <li class="page-item">
                         <a
                             class="page-link"
-                            href="?page=1"
+                            href="?page=1&search={{ request.GET.search }}"
                             aria-label="First"
                         >
-                            <span aria-hidden="true"
-                                >&laquo; First</span
-                            >
+                            <span aria-hidden="true">&laquo; First</span>
                         </a>
                     </li>
                     <li class="page-item">
                         <a
                             class="page-link"
-                            href="?page={{ page_obj.previous_page_number }}"
+                            href="?page={{ page_obj.previous_page_number }}&search={{ request.GET.search }}"
                             aria-label="Previous"
                         >
-                            <span aria-hidden="true"
-                                >Previous</span
-                            >
+                            <span aria-hidden="true">Previous</span>
                         </a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
-                        <span class="page-link"
-                            >&laquo; First</span
-                        >
-
+                        <span class="page-link">&laquo; First</span>
                     </li>
                     <li class="page-item disabled">
-                        <span class="page-link"
-                            >Previous</span
-                        >
+                        <span class="page-link">Previous</span>
                     </li>
                     {% endif %}
-                </span>
 
-                <li class="page-item disabled">
-                    <span class="page-link text-success fs-4 ">
-                        Page {{ page_obj.number }} of
-                        {{ total_pages }}
-                    </span>
+                    <li class="page-item disabled m-2">
+                        <span class="page-link text-success">
+                            Page {{ page_obj.number }} of {{ total_pages }}
+                        </span>
+                    </li>
 
-                </li>
-
-                <span class="step-links">
                     {% if page_obj.has_next %}
                     <li class="page-item">
                         <a
                             class="page-link"
-                            href="?page={{ page_obj.next_page_number }}"
+                            href="?page={{ page_obj.next_page_number }}&search={{ request.GET.search }}"
                             aria-label="Next"
                         >
-                            <span aria-hidden="true"
-                                >Next</span
-                            >
+                            <span aria-hidden="true">Next</span>
                         </a>
                     </li>
                     <li class="page-item">
                         <a
                             class="page-link"
-                            href="?page={{ page_obj.paginator.num_pages }}"
+                            href="?page={{ page_obj.paginator.num_pages }}&search={{ request.GET.search }}"
                             aria-label="Last"
                         >
-                            <span aria-hidden="true"
-                                >Last &raquo;</span
-                            >
+                            <span aria-hidden="true">Last &raquo;</span>
                         </a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
-                        <span class="page-link"
-                            >Next</span
-                        >
+                        <span class="page-link">Next</span>
                     </li>
                     <li class="page-item disabled">
-                        <span class="page-link"
-                            >Last &raquo;</span
-                        >
+                        <span class="page-link">Last &raquo;</span>
                     </li>
                     {% endif %}
-                </span>
-            </ul>
-        </nav>
+                </ul>
+            </nav>
+        </div>
     </div>
-</table>
-</form>
-</div>
-</div>
-</div>
 </div>
 {% endblock %}
